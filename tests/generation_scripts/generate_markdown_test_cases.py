@@ -1,7 +1,7 @@
 import json
 
-imported_json_file_path = 'tests/test_cases_final.json'
-exported_md_file_path = 'tests/markdown_generated.md'
+imported_json_file_path = 'tests/test_cases/input_test_cases_final.json'
+exported_md_file_path = 'tests/generation_scripts/markdown_generated.md'
 
 # Global variable to specify any additional keys to include in the detailed test case tables
 ADDITIONAL_KEYS = []  # For example, 'dicts' key in the JSON
@@ -36,20 +36,20 @@ for message in sorted(printed_messages_set):
 output += "\n"
 
 # Test Cases Summary
-output += "## Test Cases Summary\n"
+output += "## Input Test Cases Summary\n"
 output += '<table>\n'
 output += '  <tr>\n'
-output += '    <th>Test Case Description</th>\n'
+output += '    <th>Input Test Case Description</th>\n'
 output += '    <th>Inputs</th>\n'
 output += '  </tr>\n'
 
 for test_case in test_cases:
-    id_test_case = test_case.get('id_test_case')
-    test_case_description = test_case.get('test_case_description')
+    id_test_case = test_case.get('id_input_test_case')
+    test_case_description = test_case.get('input_test_case_description')
     inputs = test_case.get('inputs', [])
 
     # First cell: id_test_case: test_case_description with anchor link
-    anchor_id = f"testcase{id_test_case}"
+    anchor_id = f"inputtestcase{id_test_case}"
     description_cell = f'<a href="#{anchor_id}">{id_test_case}: {test_case_description}</a>'
 
     # Second cell: inputs as unordered list, with each input wrapped in <code></code>
@@ -72,11 +72,11 @@ all_keys = default_keys + ADDITIONAL_KEYS
 
 # For each test case, generate the detailed section
 for test_case in test_cases:
-    id_test_case = test_case.get('id_test_case')
-    test_case_description = test_case.get('test_case_description')
+    id_test_case = test_case.get('id_input_test_case')
+    test_case_description = test_case.get('input_test_case_description')
 
-    anchor_id = f"testcase{id_test_case}"
-    output += f'<h3 id="{anchor_id}">Test Case {id_test_case} Details - {test_case_description}</h3>\n\n'
+    anchor_id = f"inputtestcase{id_test_case}"
+    output += f'<h3 id="{anchor_id}">Input Test Case {id_test_case} Details - {test_case_description}</h3>\n\n'
     output += '<table>\n'
     output += '  <tr>\n'
     output += '    <th>Requirement</th>\n'

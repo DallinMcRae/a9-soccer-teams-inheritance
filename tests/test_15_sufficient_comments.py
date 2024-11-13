@@ -2,9 +2,9 @@ max_score = 1 # This value is pulled by yml_generator.py to assign a score to th
 import re
 from conftest import default_module_to_test, format_error_message, exception_message_for_students
 
-def test_08_sufficient_comments():
+def test_15_sufficient_comments(current_test_name):
     try:
-        required_num_comments = 10
+        required_num_comments = 15
         num_comments = 0
         modules_to_open = [default_module_to_test]
 
@@ -28,12 +28,14 @@ def test_08_sufficient_comments():
 
         # Ensure there are at least X comments
         assert num_comments >= required_num_comments,format_error_message(
-        f"Not enough comments found. You need at least {required_num_comments}. "
-        f"Only {num_comments} comment(s) detected.")
+            custom_message=f"Not enough comments found. You need at least {required_num_comments}. "
+                           f"Only {num_comments} comment(s) detected.",
+            current_test_name=current_test_name,
+            input_test_case= None)
     
     except AssertionError:
         raise
     
     except Exception as e:
-        test_case = {"id_test_case": None}
-        exception_message_for_students(e, test_case)
+        input_test_case = None
+        exception_message_for_students(e, input_test_case, current_test_name)

@@ -16,7 +16,7 @@ from datetime import date, datetime
 # Name of the file that will be run to generate the test cases from:
 solution_file_to_run = "a9_solution_soccer_teams_inheritance.py"
 # Name of the JSON file that is created after running the script:
-json_export_filename = r'input_test_cases_drafts.json'
+json_export_filename = r'input_test_cases_draft.json'
 
 # List of data types to track
 tracked_data_types = [
@@ -145,8 +145,8 @@ def run_and_capture(solution_file):
     global test_case_data
     # Re-initialize test_case_data
     test_case_data = {
-        "id_test_case": None,
-        "test_case_description": "",
+        "id_input_test_case": None,
+        "input_test_case_description": "",
         "inputs": [],
         "input_prompts": [],
         "printed_messages": [],
@@ -219,11 +219,11 @@ def run_and_capture(solution_file):
 
     # Assign id_test_case
     if test_cases:
-        last_id = max(tc.get("id_test_case", 0) for tc in test_cases)
+        last_id = max(tc.get("id_input_test_case", 0) for tc in test_cases)
     else:
         last_id = 0
-    test_case_data["id_test_case"] = last_id + 1
-    test_case_id = test_case_data["id_test_case"]
+    test_case_data["id_input_test_case"] = last_id + 1
+    test_case_id = test_case_data["id_input_test_case"]
 
     # Capture global variables at the end
     capture_global_variables(test_case_id, new_global_vars)
@@ -233,8 +233,8 @@ def run_and_capture(solution_file):
     builtins.print = original_print
 
     # Use original_input directly to avoid capturing this prompt
-    description = original_input("Please provide a description for this test case: ")
-    test_case_data["test_case_description"] = description
+    description = original_input("Please provide a description for this input test case: ")
+    test_case_data["input_test_case_description"] = description
 
     # Join example_output into a string and store it
     test_case_data["example_output"] = "\n".join(example_output)
